@@ -2,12 +2,14 @@ class Project {
 
     constructor(name) {
         this.id = crypto.randomUUID();
-        this.todoList = [];
+        this.taskList = [];
 
         this.name = name;
     }
 
-    addTodoToProject
+    addTask(task) {
+        this.taskList.push(task);
+    }
 }
 
 export { Project };
