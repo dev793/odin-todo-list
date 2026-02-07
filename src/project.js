@@ -18,6 +18,10 @@ class Project {
     getTasks() {
         return this.taskList;
     }
+
+    getID() {
+        return this.id;
+    }
 }
 
 export { Project };

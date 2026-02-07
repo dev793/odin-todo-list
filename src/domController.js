@@ -1,23 +1,27 @@
 const mainContent = document.querySelector("#main-content");
 
-function renderProject(project) {
-    console.log("Hello from the DOMController!")
-        
+function renderProject(projectName, projectID) {
+       
     const projectContainer = document.createElement("div");
+    const projectNameElement = document.createElement("div");
+
     projectContainer.classList.add("project-container");
+    projectContainer.dataset.projectId = projectID;
 
-    const projectName = document.createElement("div");
-    projectName.textContent = project;
+    projectNameElement.textContent = projectName;
 
-    projectContainer.appendChild(projectName);
+    projectContainer.appendChild(projectNameElement);
     mainContent.appendChild(projectContainer);
 }
 
-function renderTask(task, projectId) {
+function renderTask(taskTitle, projectID) {
     const taskCard = document.createElement("div");
+    const projectElement = document.querySelector(`[data-project-id="${projectID}"]`);
+
     taskCard.classList.add("task-card");
-    taskCard.textContent = task.title; //make this not leaky
-    mainContent.append(taskCard); //think of a way to append to project container, will need to pass in a reference somehow, then .querySelector it?
+    taskCard.textContent = taskTitle;
+    
+    projectElement.append(taskCard);
 }
 
 export { renderProject, renderTask }

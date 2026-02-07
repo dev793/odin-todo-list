@@ -6,7 +6,7 @@ import { renderProject, renderTask } from "./domController.js";
 const projectsList = []
 
 const project1 = new Project("Project 1");
-const project2 = new Project("Project 2")
+const project2 = new Project("Project 2");
 
 projectsList.push(project1);
 projectsList.push(project2);
@@ -32,10 +32,10 @@ console.log(project1.taskList)
 //renderProjects(projectsList.map(p => p.getName()));
 
 projectsList.forEach(project => {
-    renderProject(project.getName());
+    renderProject(project.getName(), project.getID());
 
     project.getTasks().forEach(task => {
-        renderTask(task);
+        renderTask(task.getTitle(), project.getID());
     })
     //for each task in project, renderTask
 })

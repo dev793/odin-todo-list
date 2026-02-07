@@ -10,6 +10,10 @@ class Task {
         this.dueDate = dueDate;
         this.priority = priority
     }
+
+    getTitle() {
+        return this.title;
+    }
 }
 
 export { Task };
