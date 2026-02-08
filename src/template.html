@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Todo App</title>
 </head>
 <body>
 
@@ -20,11 +20,44 @@
         </div>
 
         <div class="sidebar-footer">
-            <button>+ New Project</button>
+            <button id="add-project">+ New Project</button>
         </div>
     </div>
 
-    <div id="header"></div>
+    <div id="header">
+
+        <div class="current-project-title">Overview</div>
+
+        <button id="add-task">Add Task</button>
+
+        <dialog id="task-dialog">
+            <form method="dialog">
+                <div>New Task</div>
+
+                <label for="title">Title *</label>
+                <input type="text" id="title" name="title" required>
+
+                <label for="description">Description</label>
+                <textarea name="description" id="description"></textarea>
+
+                <label for="dueDate">Due Date</label>
+                <input type="date" id="dueDate" name="dueDate">
+              
+                <label for="priority">Priority</label>
+                <select name="priority" id="priority">
+                    <option value="low">Low</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="high">High</option>
+                </select>
+
+                <div>
+                    <button value="cancel" formnovalidate>Cancel</button>
+                    <button value="add">Add Task</button>
+                </div>
+            </form>
+        </dialog>
+        
+    </div>
 
     <div id="main-content"></div>
     

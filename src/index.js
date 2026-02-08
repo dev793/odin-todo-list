@@ -1,12 +1,14 @@
 import "./styles.css";
 import { Task } from "./task.js";
 import { Project } from "./project.js";
-import { renderProject, renderTask } from "./domController.js";
+import { renderProject, renderTask, bindEvents, getTaskFormData, clearForm } from "./domController.js";
 
 const projectsList = []
 
 const project1 = new Project("Project 1");
 const project2 = new Project("Project 2");
+
+let currentProject = project1;
 
 projectsList.push(project1);
 projectsList.push(project2);
@@ -14,22 +16,27 @@ projectsList.push(project2);
 console.log(projectsList);
 console.log(project1);
 
-// change the arguments to a task creation param object, and then project?
-function createTask(title, project) {
-    const task = new Task(title);
+
+function createTask(taskParams, project) {
+    const task = new Task(taskParams);
     project.addTask(task);
+    renderTask(task.getTitle(), project.getID());
 
     console.log(task);
-
 }
 
-createTask("Buy Groceries", project1);
-createTask("Walk Dog", project1)
+//need to make cancel button close modal when
+function handleClose(e) {
+    if (this.returnValue !== "add") {
+        clearForm();
+        return;
+    }
 
-console.log(project1)
-console.log(project1.taskList)
+    const formObject = Object.fromEntries(getTaskFormData().entries());
 
-//renderProjects(projectsList.map(p => p.getName()));
+    createTask(formObject, currentProject);
+    clearForm();
+}
 
 projectsList.forEach(project => {
     renderProject(project.getName(), project.getID());
@@ -37,5 +44,14 @@ projectsList.forEach(project => {
     project.getTasks().forEach(task => {
         renderTask(task.getTitle(), project.getID());
     })
-    //for each task in project, renderTask
 })
+
+createTask({title: "Buy Groceries"}, project1);
+createTask({title: "Walk Dog"}, project1)
+
+console.log(project1)
+console.log(project1.taskList)
+
+
+bindEvents(handleClose);
+
