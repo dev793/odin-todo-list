@@ -1,7 +1,7 @@
 import "./styles.css";
 import { Task } from "./task.js";
 import { Project } from "./project.js";
-import { renderProject, renderTask, bindEvents, getTaskFormData, clearForm } from "./domController.js";
+import { renderProject, renderTask, bindEvents, getTaskFormData, clearForm, removeTaskElement } from "./domController.js";
 
 const projectsList = []
 
@@ -20,9 +20,21 @@ console.log(project1);
 function createTask(taskParams, project) {
     const task = new Task(taskParams);
     project.addTask(task);
-    renderTask(task.getTitle(), project.getID());
+
+    renderTask(
+        task.getTitle(),
+        task.getID(),
+        project.getID(),
+        deleteTask
+        );
 
     console.log(task);
+}
+
+function deleteTask(taskID, projectID) {
+    const project = projectsList.find(project => project.getID() === projectID)
+    project.removeTask(taskID);
+    removeTaskElement(taskID);
 }
 
 //need to make cancel button close modal when

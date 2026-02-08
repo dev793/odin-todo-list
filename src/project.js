@@ -11,6 +11,13 @@ class Project {
         this.taskList.push(task);
     }
 
+    //Do I need to import Task into this module??
+    removeTask(taskID) {
+        this.taskList = this.taskList.filter(
+            task => task.getID() !== taskID
+        );
+    }
+
     getName() {
         return this.name;
     }

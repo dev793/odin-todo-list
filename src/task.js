@@ -11,6 +11,10 @@ class Task {
         this.priority = priority;
     }
 
+    getID() {
+        return this.title;
+    }
+
     getTitle() {
         return this.title;
     }

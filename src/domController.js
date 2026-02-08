@@ -18,14 +18,52 @@ function renderProject(projectName, projectID) {
     mainContent.appendChild(projectContainer);
 }
 
-function renderTask(taskTitle, projectID) {
+function removeTaskElement(taskID) {
+    const taskCard = document.querySelector(`[data-task-id="${taskID}"]`);
+    taskCard.remove();
+}
+
+//perhaps split out the button creation into it's own function?
+function renderTask(taskTitle, taskID, projectID, onDelete) {
     const taskCard = document.createElement("div");
     const projectElement = document.querySelector(`[data-project-id="${projectID}"]`);
 
     taskCard.classList.add("task-card");
     taskCard.textContent = taskTitle;
+    taskCard.dataset.taskId = taskID;
+    taskCard.dataset.projectId = projectID;
+
+    //TODO: Create checkbox element too, place left of title
+    const btnContainer = document.createElement("div");
+    const viewBtn = document.createElement("button");
+    const editBtn = document.createElement("button");
+    const deleteBtn = document.createElement("button");
+
+    viewBtn.textContent = "View";
+    editBtn.textContent = "Edit";
+    deleteBtn.textContent = "Delete";
+
+    viewBtn.addEventListener("click", () => {
+        return;
+    })
+
+    editBtn.addEventListener("click", () => {
+        return;
+    })
+
+    deleteBtn.addEventListener("click", () => {
+        onDelete(taskID, projectID);
+    });
+
+    btnContainer.append(viewBtn);
+    btnContainer.append(editBtn);
+    btnContainer.append(deleteBtn);
+
+    taskCard.append(btnContainer);
 
     projectElement.append(taskCard);
+
+
 }
 
 function bindEvents(handleClose) {
@@ -45,4 +83,4 @@ function clearForm() {
     addTaskForm.reset();
 }
 
-export { renderProject, renderTask, bindEvents, getTaskFormData, clearForm }
+export { renderProject, renderTask, bindEvents, getTaskFormData, clearForm, removeTaskElement }
